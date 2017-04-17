@@ -1,0 +1,16 @@
+{
+    "extends": "standard",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "globals": {
+        "jQuery": true,
+        "$":true,
+        "PhotoSphereViewer": false
+    }
+}
