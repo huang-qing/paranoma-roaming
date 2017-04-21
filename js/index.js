@@ -66,7 +66,7 @@ $(function() {
             'moveTodown'
         ],
         baseUrl: 'dist/paranoma-roaming/',
-        loadingVideo: 'src/video/mov_bbb.mp4',
+        //loadingVideo: 'src/video/mov_bbb.mp4',
         bgAudio: 'src/audio/Amernan - The Last Of The Mohicans.mp3'
     });
 
