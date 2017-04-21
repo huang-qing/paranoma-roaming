@@ -72,7 +72,7 @@ $(function() {
         ],
         baseUrl: 'paranoma-roaming/',
         loadingVideo: 'video/mov_bbb.mp4',
-        loadingImage: 'video/barbell.png',
+        loadingImage: 'video/clock.png',
         // loadingVideoLoop: true,
         bgAudio: 'audio/Amernan - The Last Of The Mohicans.mp3',
         bgAudioVolume: 0.2

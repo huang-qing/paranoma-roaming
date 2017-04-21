@@ -11,7 +11,7 @@
  * Date: 2017-02-26
  */
 
-(function(PhotoSphereViewer, $, window) {
+(function (PhotoSphereViewer, $, window) {
     function ParanomaRoaming(options) {
         // autorotate, zoom, download, markers, gyroscope, fullscreen , caption
         // moveleft , moveright , moveup , movedown , moveforward , moveback , play , pause
@@ -124,18 +124,18 @@
         this.init();
     }
 
-    ParanomaRoaming.prototype.init = function() {
+    ParanomaRoaming.prototype.init = function () {
         var pr = this;
 
         this.initRelativeUrl();
         this.initLoadingVideo();
         this.initAudio();
         this.showLoading();
-        this.initPreloadPanoramas().then(function() {
+        this.initPreloadPanoramas().then(function () {
             return pr.preloadPanoramasInIframe();
-        }).then(function() {
+        }).then(function () {
             return pr.preloadPanoramasInTexture(0, pr['cache_texture'] / 2);
-        }).then(function() {
+        }).then(function () {
             // 启动第一帧
             pr.render();
             pr.ready = true;
@@ -145,7 +145,7 @@
         this.initViewer();
     };
 
-    ParanomaRoaming.prototype.initRelativeUrl = function() {
+    ParanomaRoaming.prototype.initRelativeUrl = function () {
         var replace = '../',
             baseUrl = this.baseUrl,
             relativeUrl = '',
@@ -158,7 +158,7 @@
         this.relativeUrl = relativeUrl;
     };
 
-    ParanomaRoaming.prototype.initLoadingVideo = function() {
+    ParanomaRoaming.prototype.initLoadingVideo = function () {
         var videoContainer,
             videoIframe,
             src = this.baseUrl + 'video.html',
@@ -177,7 +177,7 @@
         videoIframe = videoContainer.find('iframe')[0];
         contentWindow = videoIframe.contentWindow;
 
-        contentWindow.onload = function() {
+        contentWindow.onload = function () {
             // 加载视频
             if (pr.loadingVideo) {
                 var video = contentWindow.document.querySelector('#pr-loading-video');
@@ -185,11 +185,11 @@
                 video.src = loadingVideo;
                 video.autoplay = true;
                 video.loop = loop;
-                video.onload = function() {
+                video.onload = function () {
 
                 };
 
-                video.onended = function() {
+                video.onended = function () {
                     videoContainer.addClass('pr-iframe-video-hidden');
                     console.log('视频播放完成');
                 };
@@ -200,7 +200,7 @@
                 pr.image = image;
                 image.src = loadingImage;
 
-                image.onload = function() {
+                image.onload = function () {
                     var width = this.width,
                         height = this.height;
 
@@ -212,7 +212,7 @@
         };
     };
 
-    ParanomaRoaming.prototype.initAudio = function() {
+    ParanomaRoaming.prototype.initAudio = function () {
         var audioContainer,
             audioIframe,
             src = this.baseUrl + 'audio.html',
@@ -223,7 +223,7 @@
         audioIframe = audioContainer.find('iframe')[0];
         contentWindow = audioIframe.contentWindow;
 
-        contentWindow.onload = function() {
+        contentWindow.onload = function () {
             pr.audio = contentWindow.document.querySelector('#pr-audio');
             pr.bgAudio = contentWindow.document.querySelector('#pr-bg-audio');
             // 自动播放背景音乐
@@ -231,7 +231,7 @@
         };
     };
 
-    ParanomaRoaming.prototype.initPreloadPanoramas = function() {
+    ParanomaRoaming.prototype.initPreloadPanoramas = function () {
         var pictureContainer,
             pictureIframe,
             iframeSrc = this.baseUrl + 'preload.html',
@@ -244,11 +244,11 @@
         if (typeof (Worker) !== 'undefined') {
             worker = new Worker(workerSrc);
 
-            worker.onmessage = function(event) {
+            worker.onmessage = function (event) {
                 // console.log(event.data);
             };
 
-            worker.onerror = function(error) {
+            worker.onerror = function (error) {
                 console.log('Worker error: ' + error.message + '\n');
                 alert('Worker error');
                 throw error;
@@ -264,8 +264,8 @@
 
         this.preloadWindow = contentWindow;
 
-        promise = new Promise(function(resolve, reject) {
-            contentWindow.onload = function() {
+        promise = new Promise(function (resolve, reject) {
+            contentWindow.onload = function () {
                 resolve();
             };
         });
@@ -273,7 +273,7 @@
         return promise;
     };
 
-    ParanomaRoaming.prototype.initNavbar = function() {
+    ParanomaRoaming.prototype.initNavbar = function () {
         var navbar = [],
             pr = this,
             hash,
@@ -293,7 +293,7 @@
                 title: '开始',
                 className: 'custom-button',
                 content: '▶',
-                onClick: function() {
+                onClick: function () {
                     pr.play();
                     console.log('play');
                 },
@@ -303,7 +303,7 @@
                 title: '暂停',
                 className: 'custom-button',
                 content: '▪',
-                onClick: function() {
+                onClick: function () {
                     pr.pause();
                     console.log('pause');
                 },
@@ -313,7 +313,7 @@
                 title: '左',
                 className: 'custom-button',
                 content: '↶',
-                onClick: function() {
+                onClick: function () {
                     pr.moveLeft();
                     console.log('moveLeft');
                 },
@@ -323,7 +323,7 @@
                 title: '右',
                 className: 'custom-button',
                 content: '↷',
-                onClick: function() {
+                onClick: function () {
                     pr.moveRight();
                     console.log('moveRight');
                 },
@@ -333,7 +333,7 @@
                 title: '上',
                 className: 'custom-button',
                 content: '⇡',
-                onClick: function() {
+                onClick: function () {
                     pr.moveUp();
                     console.log('moveUp');
                 },
@@ -343,7 +343,7 @@
                 title: '下',
                 className: 'custom-button',
                 content: '⇣',
-                onClick: function() {
+                onClick: function () {
                     pr.moveDown();
                     console.log('moveDown');
                 },
@@ -353,7 +353,7 @@
                 title: '前进',
                 className: 'custom-button',
                 content: '↥',
-                onClick: function() {
+                onClick: function () {
                     pr.moveForward();
                     console.log('moveforward');
                 },
@@ -363,7 +363,7 @@
                 title: '后退',
                 className: 'custom-button',
                 content: '↧',
-                onClick: function() {
+                onClick: function () {
                     pr.moveBack();
                     console.log('moveback');
                 },
@@ -373,7 +373,7 @@
                 title: '经度-Math.PI / 3',
                 className: 'custom-button',
                 content: '↰',
-                onClick: function() {
+                onClick: function () {
                     pr.moveTo(-Math.PI / 3, null);
                     console.log('moveToleft:-Math.PI / 3');
                 },
@@ -383,7 +383,7 @@
                 title: '经度Math.PI/3',
                 className: 'custom-button',
                 content: '↱',
-                onClick: function() {
+                onClick: function () {
                     pr.moveTo(Math.PI / 3, null);
                     console.log('moveToright:Math.PI / 3');
                 },
@@ -393,7 +393,7 @@
                 title: '纬度Math.PI / 8',
                 className: 'custom-button',
                 content: '⇞',
-                onClick: function() {
+                onClick: function () {
                     pr.moveTo(null, Math.PI / 8);
                     console.log('moveToup:Math.PI / 8');
                 },
@@ -403,7 +403,7 @@
                 title: '纬度-Math.PI / 8',
                 className: 'custom-button',
                 content: '⇟',
-                onClick: function() {
+                onClick: function () {
                     pr.moveTo(null, -Math.PI / 8);
                     console.log('moveTodown:-Math.PI / 8');
                 },
@@ -413,7 +413,7 @@
                 title: '纬度0,经度0',
                 className: 'custom-button',
                 content: '⇪',
-                onClick: function() {
+                onClick: function () {
                     pr.moveTo(0, 0);
                     console.log('moveToCenter:0,0');
                 },
@@ -423,7 +423,7 @@
                 title: '加速',
                 className: 'custom-button',
                 content: '↟',
-                onClick: function() {
+                onClick: function () {
                     if (speed < 1) {
                         speed = speed + 0.2;
                     } else {
@@ -438,7 +438,7 @@
                 title: '减速',
                 className: 'custom-button',
                 content: '↡',
-                onClick: function() {
+                onClick: function () {
                     if (speed <= 1) {
                         speed = speed - 0.2;
                     } else {
@@ -466,7 +466,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.initViewer = function() {
+    ParanomaRoaming.prototype.initViewer = function () {
         this.viewer = new PhotoSphereViewer({
             // loading_img: 'photosphere-logo.gif',
             // caption: 'Bryce Canyon National Park <b>&copy; Mark Doliner</b>',
@@ -499,18 +499,18 @@
         });
     };
 
-    ParanomaRoaming.prototype.showLoading = function() {
+    ParanomaRoaming.prototype.showLoading = function () {
         var loading = '<div class="paranoma-roaming-preload"> ' +
             '<div class="paranoma-roaming-preload-logo' + (this.loadingVideo ? '-hidden' : '') + '"> </div>' +
             ' </div>';
         $(loading).appendTo('body');
     };
 
-    ParanomaRoaming.prototype.closeLoading = function() {
+    ParanomaRoaming.prototype.closeLoading = function () {
         $('.paranoma-roaming-preload').remove();
     };
 
-    ParanomaRoaming.prototype.getPreloadPanoramasInfo = function() {
+    ParanomaRoaming.prototype.getPreloadPanoramasInfo = function () {
         var pictures = this.pictures.list,
             cache = this.cache,
             index = this.pictures.index,
@@ -561,7 +561,7 @@
     };
 
     // 预加载图片:首次加载使用
-    ParanomaRoaming.prototype.preloadPanoramasInIframe = function() {
+    ParanomaRoaming.prototype.preloadPanoramasInIframe = function () {
         var list = ['preload'],
             contentWindow = this.preloadWindow,
             preloadInfo;
@@ -576,7 +576,7 @@
     };
 
     // 预加载图片:动画过程中使用
-    ParanomaRoaming.prototype.preloadPanoramasInWebWorker = function() {
+    ParanomaRoaming.prototype.preloadPanoramasInWebWorker = function () {
         var worker = this.preloadWorker,
             preloadInfo;
 
@@ -587,7 +587,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.playAudio = function() {
+    ParanomaRoaming.prototype.playAudio = function () {
         var picture = this.pictures.list[this.pictures.index],
             url = this.relativeUrl + picture.audio,
             audio = this.audio;
@@ -599,7 +599,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.playBgAudio = function() {
+    ParanomaRoaming.prototype.playBgAudio = function () {
         var url = this.relativeUrl + this.bgAudioUrl,
             audio = this.bgAudio;
 
@@ -621,7 +621,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.preloadPanoramaList = function(start, end) {
+    ParanomaRoaming.prototype.preloadPanoramaList = function (start, end) {
         var list = [],
             i,
             pictures = this.pictures.list,
@@ -637,7 +637,7 @@
         return list;
     };
 
-    ParanomaRoaming.prototype.preloadPanoramasInTexture = function(start, end) {
+    ParanomaRoaming.prototype.preloadPanoramasInTexture = function (start, end) {
         var list = [],
             i,
             pictures = this.pictures.list,
@@ -665,7 +665,7 @@
         return Promise.all(list);
     };
 
-    ParanomaRoaming.prototype.preloadNextPictureTexture = function() {
+    ParanomaRoaming.prototype.preloadNextPictureTexture = function () {
         var cache = this.cache.texture,
             frameNumber = this.frameNumber,
             pictureIndex,
@@ -692,7 +692,7 @@
 
             if (count > 0) {
                 if (promise) {
-                    promise.then(function() {
+                    promise.then(function () {
                         preload();
                     });
                 } else {
@@ -704,7 +704,7 @@
         preload();
     };
 
-    ParanomaRoaming.prototype.render = function() {
+    ParanomaRoaming.prototype.render = function () {
         var url,
             name,
             viewer = this.viewer,
@@ -758,7 +758,7 @@
 
         // 图片相同，不再次渲染
         if (pr.pictures.lastPicture === url) {
-            promise = new Promise(function(resolve, reject) {
+            promise = new Promise(function (resolve, reject) {
                 viewer.rotate({
                     longitude: pr.longitude,
                     latitude: pr.latitude
@@ -766,19 +766,24 @@
                 resolve();
             });
         } else {
-            promise = viewer.setPanorama(url, {
-                longitude: pr.longitude,
-                latitude: pr.latitude
-            }, false).then(function() {
-                pr.pictures.lastPicture = url;
-                viewer.setCaption(name);
+            promise = new Promise(function (resolve, reject) {
+                viewer.setPanorama(url, {
+                    longitude: pr.longitude,
+                    latitude: pr.latitude
+                }, false).then(function () {
+                    pr.pictures.lastPicture = url;
+                    if (viewer.setCaption) {
+                        viewer.setCaption(name);
+                    }
+                    resolve();
+                });
             });
         }
 
         return promise;
     };
 
-    ParanomaRoaming.prototype.reanderAnimation = function() {
+    ParanomaRoaming.prototype.reanderAnimation = function () {
         var promise,
             pr = this;
 
@@ -787,15 +792,15 @@
         promise = this.render();
         this.playAudio();
         if (this.state === 'play') {
-            promise.then(function() {
-                requestAnimationFrame(function() {
+            promise.then(function () {
+                requestAnimationFrame(function () {
                     pr.reanderAnimation.call(pr);
                 });
             });
         }
     };
 
-    ParanomaRoaming.prototype.play = function() {
+    ParanomaRoaming.prototype.play = function () {
         if (this.state !== this.stateType.play) {
             this.state = this.stateType.play;
             this.reanderAnimation();
@@ -804,18 +809,18 @@
         }
     };
 
-    ParanomaRoaming.prototype.pause = function() {
+    ParanomaRoaming.prototype.pause = function () {
         this.state = this.stateType.pause;
     };
 
-    ParanomaRoaming.prototype.moveLeft = function() {
+    ParanomaRoaming.prototype.moveLeft = function () {
         this.left = true;
         this.right = false;
         this.longitudeOffset = this.longitudeOffset <= 0 ? this.longitudeDatum : this.longitudeOffset;
         this.resetMoveToLocation(true, false);
     };
 
-    ParanomaRoaming.prototype.moveRight = function() {
+    ParanomaRoaming.prototype.moveRight = function () {
         this.right = true;
         this.left = false;
         this.longitudeOffset = this.longitudeOffset <= 0 ? this.longitudeDatum : this.longitudeOffset;
@@ -823,7 +828,7 @@
         this.resetMoveToLocation(true, false);
     };
 
-    ParanomaRoaming.prototype.moveUp = function() {
+    ParanomaRoaming.prototype.moveUp = function () {
         this.up = true;
         this.down = false;
         this.latitudeOffset = this.latitudeOffset <= 0 ? this.latitudeDatum : this.latitudeOffset;
@@ -831,7 +836,7 @@
         this.resetMoveToLocation(false, true);
     };
 
-    ParanomaRoaming.prototype.moveDown = function() {
+    ParanomaRoaming.prototype.moveDown = function () {
         this.down = true;
         this.up = false;
         this.latitudeOffset = this.latitudeOffset <= 0 ? this.latitudeDatum : this.latitudeOffset;
@@ -839,19 +844,19 @@
         this.resetMoveToLocation(false, true);
     };
 
-    ParanomaRoaming.prototype.moveForward = function() {
+    ParanomaRoaming.prototype.moveForward = function () {
         this.forward = true;
         this.back = false;
         this.frameNumberOffset = this.frameNumberOffset <= 0 ? this.frameDatum : this.frameNumberOffset;
     };
 
-    ParanomaRoaming.prototype.moveBack = function() {
+    ParanomaRoaming.prototype.moveBack = function () {
         this.forward = false;
         this.back = true;
         this.frameNumberOffset = this.frameNumberOffset <= 0 ? this.frameDatum : this.frameNumberOffset;
     };
 
-    ParanomaRoaming.prototype.moveTo = function(longitude, latitude) {
+    ParanomaRoaming.prototype.moveTo = function (longitude, latitude) {
         if (longitude !== null) {
             if (longitude < this.longitude) {
                 this.moveLeft();
@@ -873,7 +878,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.resetMoveToLocation = function(longitude, latitude) {
+    ParanomaRoaming.prototype.resetMoveToLocation = function (longitude, latitude) {
         if (longitude) {
             this.moveToLocation.longitude = null;
         } else if (latitude) {
@@ -881,7 +886,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.setSpeed = function(speed, direction) {
+    ParanomaRoaming.prototype.setSpeed = function (speed, direction) {
         var pr = this;
 
         speed = Math.abs(speed);
@@ -895,7 +900,7 @@
         }
     };
 
-    ParanomaRoaming.prototype.getNextFrameInfo = function(currentFrameNumber) {
+    ParanomaRoaming.prototype.getNextFrameInfo = function (currentFrameNumber) {
         var pictureIndex = 0,
             frameNumber = currentFrameNumber,
             pictureCount = this.pictures.count;
@@ -922,7 +927,7 @@
         };
     };
 
-    ParanomaRoaming.prototype.getNextPicture = function() {
+    ParanomaRoaming.prototype.getNextPicture = function () {
         var pictureIndex = 0,
             frameNumber = this.frameNumber,
             info;

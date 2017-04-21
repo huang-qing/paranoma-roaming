@@ -82,7 +82,8 @@ gulp.task('build-libsJavascript', function() {
 });
 
 // 生成build task
-gulp.task('build-build', plugins.sequence(
+// gulp task-build
+gulp.task('task-build', plugins.sequence(
     'clean-build', ['build-libsCss', 'build-libsJavascript',
         'build-src-js', 'build-src-css', 'build-src-image', 'build-src-html'
     ]));
@@ -137,7 +138,8 @@ gulp.task('build-dist-js', function() {
 });
 
 // 生成dist task
-gulp.task('build-dist', plugins.sequence(
-    'build-build', 'clean-dist', ['build-dist-html', 'build-dist-image',
+// gulp task-dist
+gulp.task('task-dist', plugins.sequence(
+    'task-build', 'clean-dist', ['build-dist-html', 'build-dist-image',
         'build-dist-css', 'build-dist-js'
     ]));
