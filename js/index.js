@@ -10,7 +10,7 @@ $(function() {
             end = 195,
             // end = 80,
             // baseUrl = 'pictures/',
-            baseUrl = '../src/pictures/1000/',
+            baseUrl = 'src/pictures/1000/',
             index = '';
 
         for (var i = start; i < end; i++) {
@@ -22,13 +22,13 @@ $(function() {
 
             if (i < 10) {
                 index = '000' + i;
-                picture.audio = '../src/audio/Amernan - The Last Of The Mohicans.mp3';
+                picture.audio = 'src/audio/Amernan - The Last Of The Mohicans.mp3';
             } else if (i < 100) {
                 index = '00' + i;
-                picture.audio = '../src/audio/horse.ogg';
+                picture.audio = 'src/audio/horse.ogg';
             } else {
                 index = '0' + i;
-                picture.audio = '../src/audio/Amernan - The Last Of The Mohicans.mp3';
+                picture.audio = 'src/audio/Amernan - The Last Of The Mohicans.mp3';
             }
 
             // name = 'zuilou_' + index + '.jpg';
@@ -65,9 +65,9 @@ $(function() {
             'moveToup',
             'moveTodown'
         ],
-        baseUrl: '../dist/paranoma-roaming/',
-        loadingVideo: '../src/video/mov_bbb.mp4',
-        bgAudio: '../src/audio/Amernan - The Last Of The Mohicans.mp3'
+        baseUrl: 'dist/paranoma-roaming/',
+        loadingVideo: 'src/video/mov_bbb.mp4',
+        bgAudio: 'src/audio/Amernan - The Last Of The Mohicans.mp3'
     });
 
     window.pr = pr;
