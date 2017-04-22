@@ -49,9 +49,6 @@ $(function() {
         container: 'paranoma-roaming-container',
         pictures: pictures,
         navbar: [
-            // 'autorotate',
-            // 'zoom',
-            // 'gyroscope',
             // 'fullscreen',
             'caption',
             'play',
