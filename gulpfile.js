@@ -45,6 +45,10 @@ gulp.task('build-libsCss', function() {
         .pipe(gulp.dest(buildDest));
 });
 
+/**
+ * GulpUglifyError: unable to minify JavaScript
+ * gulp中对于es6的语法的压缩是有问题的
+ */
 gulp.task('build-src-js', function() {
     return gulp.src(buildSrc + '/*.js')
         .pipe(gulp.dest(buildDest))

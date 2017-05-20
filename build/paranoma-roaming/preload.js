@@ -1,4 +1,4 @@
-onmessage = function(event) {
+onmessage = function (event) {
     // 通过event.data获得发送来的数据
     var d = event.data;
 
@@ -20,7 +20,7 @@ function loadPicturesByCallback(pictures, relativeUrl, start, end) {
             url = relativeUrl + picture.url;
             xmlHttp = new XMLHttpRequest();
 
-            xmlHttp.onreadystatechange = function() {
+            xmlHttp.onreadystatechange = function () {
                 var XMLHttpReq = xmlHttp;
                 if (XMLHttpReq.readyState === 4) {
                     if (XMLHttpReq.status === 200) {
@@ -60,7 +60,7 @@ function loadPicturesByTimeout(pictures, relativeUrl, start, end) {
         i++;
         // 执行load
         if (i < end) {
-            setTimeout(function() {
+            setTimeout(function () {
                 loadPicture();
             }, 160);
         }

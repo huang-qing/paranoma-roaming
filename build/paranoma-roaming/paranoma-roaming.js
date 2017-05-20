@@ -118,6 +118,10 @@
         this.bgAudioUrl = options.bgAudio || null;
         this.bgAudioVolume = options.bgAudioVolume || 0.5;
 
+        // 路标
+        // this.subTitles = [];
+        this.lastSubTitles = [];
+
         // web worker
         this.preloadWorker;
 
@@ -510,6 +514,65 @@
         $('.paranoma-roaming-preload').remove();
     };
 
+    ParanomaRoaming.prototype.showSubTitles = function () {
+        var picture = this.pictures.list[this.pictures.index],
+            subTitles = picture.subTitles,
+            self = this;
+
+        if (!subTitles || this.lastSubTitles.length !== subTitles.length) {
+            self.removeSubTitles();
+        }
+
+        if (subTitles && subTitles instanceof Array) {
+            subTitles.forEach(function (subTitle, index) {
+                var lastSubTitle,
+                    img = null;
+
+                lastSubTitle = self.lastSubTitles[index];
+                if (lastSubTitle && lastSubTitle.url === subTitle.url) {
+                    return;
+                }
+                img = lastSubTitle ? lastSubTitle.elem : null;
+
+                self.showSubTitle(img, subTitle);
+            });
+        }
+    }
+
+    ParanomaRoaming.prototype.showSubTitle = function (img, opt) {
+        if (!img) {
+            img = $('<img src="' + opt.url + '"/>').css({
+                position: 'absolute',
+                left: opt.left,
+                bottom: opt.bottom,
+                right: opt.right,
+                top: opt.top
+            });
+
+            $('#' + this.container).append(img);
+            this.lastSubTitles.push({
+                elem: img,
+                url: opt.url
+            });
+        } else {
+            img.attr('src', opt.url).css({
+                left: opt.left,
+                bottom: opt.bottom,
+                right: opt.right,
+                top: opt.top
+            });
+        }
+    }
+
+    ParanomaRoaming.prototype.removeSubTitles = function () {
+        if (this.lastSubTitles.length > 0) {
+            this.lastSubTitles.forEach(function (subTitle) {
+                subTitle.elem.remove();
+            });
+            this.lastSubTitles = [];
+        }
+    }
+
     ParanomaRoaming.prototype.getPreloadPanoramasInfo = function () {
         var pictures = this.pictures.list,
             cache = this.cache,
@@ -791,6 +854,7 @@
         this.preloadPanoramasInWebWorker();
         promise = this.render();
         this.playAudio();
+        this.showSubTitles();
         if (this.state === 'play') {
             promise.then(function () {
                 requestAnimationFrame(function () {

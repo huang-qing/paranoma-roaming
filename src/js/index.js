@@ -1,7 +1,7 @@
 /* global ParanomaRoaming */
 
-$(function() {
-    var pictures = (function() {
+$(function () {
+    var pictures = (function () {
         var pictures = [],
             // count,
             name,
@@ -25,10 +25,36 @@ $(function() {
                 index = '000' + i;
                 // picture.audio = 'audio/Amernan - The Last Of The Mohicans.mp3';
                 picture.audio = 'audio/horse.ogg';
+                picture.subTitles = [{
+                    top: '',
+                    left: 0,
+                    bottom: 0,
+                    right: '',
+                    url: 'subtitles/subtitles-1.png'
+                }, {
+                    top: '',
+                    left: '',
+                    bottom: 0,
+                    right: 0,
+                    url: 'subtitles/subtitles-2.png'
+                }];
             } else if (i < 100) {
                 index = '00' + i;
                 // picture.audio = 'audio/Amernan - The Last Of The Mohicans.mp3';
                 picture.audio = 'audio/horse-2.ogg';
+                picture.subTitles = [{
+                    top: '',
+                    left: 0,
+                    bottom: 0,
+                    right: '',
+                    url: 'subtitles/subtitles-2.png'
+                }, {
+                    top: '',
+                    left: '',
+                    bottom: 0,
+                    right: 0,
+                    url: 'subtitles/subtitles-1.png'
+                }];
             } else {
                 index = '0' + i;
                 picture.audio = 'audio/horse.ogg';
